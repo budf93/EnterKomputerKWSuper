@@ -1,2 +1,36 @@
-tema : toko laptop
-atribut : nama, jumlah, harga, deskripsi
+Nama            : Fikri Budianto
+Kelas           : PBP F
+Link Adaptable  : https://enterkomputerkwsuper.adaptable.app/main/
+
+1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+Sebelum membuat proyek baru, saya pertama-tama membuat repository git yang nantinya akan diinisialisasi
+menggunakan perintah git init dengan menggunakan command prompt. Hal ini saya lakukan agar proyek yang saya kerjakan dapat saya commit dan push ke GitHub sehingga nantinya proyek saya bisa saya deploy. Repository lokal yang terdapat pada komputer saya nantinya akan saya hubungkan dengan repository di GitHub dengan menjalankan perintah:
+
+git branch -M main
+git remote add origin https://github.com/budf93/EnterKomputerKWSuper 
+git push -u origin main
+
+Setelah menginisialisasi git, saya menginisialisasi projek Django dengan pertama-tama membuat virtual environment dan mengaktifkan virtual environment tersebut. Hal ini dilakukan guna membantu mengisolasi dependencies antara proyek-proyek yang berbeda. Hal itu saya lakukan dengan menjalankan kedua perintah ini
+
+python -m venv env
+env\Scripts\activate.bat
+
+Setelah itu, saya menambahkan dependencies yang diperlukan dengan memasukkan dependencies yang dibutuhkan ke dalam requirements.txt lalu saya pasang dependencies tersebut dengan perintah berikut:
+
+pip install -r requirements.txt
+
+Lalu, saya buat proyek EnterKomputerKWSuper dengan perintah berikut.
+
+django-admin startproject EnterKomputerKWSuper .
+
+Lalu, saya menambahkan "*" pada ALLOWED_HOSTS sehingga semua host diizinkan untuk mengakses aplikasi web.
+
+2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
+
+3. Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?
+
+Kita bisa membuat aplikasi web berbasis Django tanpa menggunakan virtual environment. Namun, pembuat aplikasi web sangat disarankan menggunakan virtual environment karena virtual environment bertugas untuk membantu mengisolasi dependencies antara proyek-proyek yang berbeda sehingga kita tidak perlu khawatir proyek kita akan berinterferensi dengan proyek lain. Selain itum virtual environment juga dapat mencegah masalah-masalah yang disebabkan oleh permasalahan environment seperti aplikasi yang dapat berjalan pada komputer kita tetapi tidak dapat berjalan di komputer orang lain. 
+
+4. Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya.
+
