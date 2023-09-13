@@ -26,6 +26,23 @@ django-admin startproject EnterKomputerKWSuper .
 
 Lalu, saya menambahkan "*" pada ALLOWED_HOSTS sehingga semua host diizinkan untuk mengakses aplikasi web.
 
+Setelah saya menambahkan "*" pada ALLOWED_HOSTS saya menjalankan aplikasi yang bernama main yang nantinya saya aktifkan dengan menggunakan perintah
+
+python manage.py startapp main
+
+Setelah membuat aplikasi yang bernama main, saya menambahkan aplikasi main ke dalam proyek dengan menambahkan "main" ke dalam list INSTALLED_APPS.
+
+Setelah menambahkan main ke dalam INSTALLED_APPS, saya melakukan routing pada proyek agak dapat menjalankan aplikasi main dengan cara menambahkan urls.py yang bertugas untuk mengatur rute URL yang terkait dengan aplikasi main dengan kode berikut
+
+from django.urls import path
+from main.views import show_main
+
+app_name = 'main'
+
+urlpatterns = [
+    path('', show_main, name='show_main'),
+]
+
 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 
 ![Alt text](image.png)
