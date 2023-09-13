@@ -28,6 +28,8 @@ Lalu, saya menambahkan "*" pada ALLOWED_HOSTS sehingga semua host diizinkan untu
 
 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 
+![Alt text](image.png)
+
 3. Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?
 
 Kita bisa membuat aplikasi web berbasis Django tanpa menggunakan virtual environment. Namun, pembuat aplikasi web sangat disarankan menggunakan virtual environment karena virtual environment bertugas untuk membantu mengisolasi dependencies antara proyek-proyek yang berbeda sehingga kita tidak perlu khawatir proyek kita akan berinterferensi dengan proyek lain. Selain itu virtual environment juga dapat mencegah masalah-masalah yang disebabkan oleh permasalahan environment seperti aplikasi yang dapat berjalan pada komputer kita tetapi tidak dapat berjalan di komputer orang lain. 
