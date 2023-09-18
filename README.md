@@ -184,4 +184,14 @@ Setelah itu, saya menambahkan kode berikut pada main.html untuk menampilkan data
     path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'),
     path('json/<int:id>/', show_json_by_id, name='show_json_by_id'),
 
+Screenshot hasil akses URL pada postman:
 
+EnterKomputerKWSuper/image-1.png
+
+EnterKomputerKWSuper/image-2.png
+
+EnterKomputerKWSuper/image-3.png
+
+EnterKomputerKWSuper/image-4.png
+
+EnterKomputerKWSuper/image-5.png
