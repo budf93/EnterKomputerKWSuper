@@ -2,59 +2,186 @@ Nama            : Fikri Budianto
 Kelas           : PBP F
 Link Adaptable  : https://enterkomputerkwsuper.adaptable.app/main/
 
-1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+1. Apa perbedaan antara form POST dan form GET dalam Django?
+- Pada form GET, suatu data diminta dari resource tertentu, sedangkan pada form POST data dikirim untuk diproses pada resource tertentu.
+- GET hanya boleh digunakan untuk memproses permintaan yang tidak memengaruhi kondisi dari sistem, sedangkan POST memang ditujukan untuk digunakan untuk memproses permintaan yanng dapat mengubah kondisi sistem.
+- GET menambahkan from-data ke dalam URL dalam bentuk pasangan name-value, sedangkan POST menambahkan from-data ke dalam body dari permintaan permintaan HTTP sehingga data tidak ditampilkan di dalam URL.
+- GET tidak dapat digunakan untuk mengirimkan data binary seperti gambar atau dokumen, sedangkan POST dapat digunakan untuk mengirimkan data ASCII dan juga data binary.
 
-Sebelum membuat proyek baru, saya pertama-tama membuat repository git yang nantinya akan diinisialisasi
-menggunakan perintah git init dengan menggunakan command prompt. Hal ini saya lakukan agar proyek yang saya kerjakan dapat saya commit dan push ke GitHub sehingga nantinya proyek saya bisa saya deploy. Repository lokal yang terdapat pada komputer saya nantinya akan saya hubungkan dengan repository di GitHub dengan menjalankan perintah:
+2. Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?
+Perbedaan antara XML, JSON, dan HTML adalah XML dan JSON digunakan untuk penyimpanan dan pengiriman data, sedangkan HTML digunakan untuk mendeskripsikan bagaimana data tersebut ditampilkan di layar. Selain itu, walaupun XML dan JSON memiliki kemiripan dari segi penggunaan, terdapat beberapa perbedaan juga antara XML dan JSON.
 
-git branch -M main
-git remote add origin https://github.com/budf93/EnterKomputerKWSuper 
-git push -u origin main
+JSON memiliki fitur array yang dapat digunakan untuk menyimpan objek, tidak menggunakan end tag, dan lebih mudah untuk dibaca dan ditulis dibandingkan XML. Namun, dari segi keamanan XML memiliki tingkat keamanan yang lebih tinggi dibandingkan JSON. XML juga memiliki fitur komentar dan XML memiliki dukungan untuk berbagai macam jenis encoding, berlawanan dengan JSON yang hanya mendukung encoding UTF-8
 
-Setelah menginisialisasi git, saya menginisialisasi projek Django dengan pertama-tama membuat virtual environment dan mengaktifkan virtual environment tersebut. Hal ini dilakukan guna membantu mengisolasi dependencies antara proyek-proyek yang berbeda. Hal itu saya lakukan dengan menjalankan kedua perintah ini
+3. Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
+JSON sering digunakan dalam pertukaran data antara aplikasi web modern karena:
+- Ukuran file dari JSON yang sangat ringan
+- Sifat dari berkas JSON yang mudah dibaca dan dipahami oleh programmer lain
+- Hampir semua bahasa pemrograman yang populer memiliki kemampuan untuk membaca file JSON dan mengkonversikannya menjadi suatu objek atau class
 
-python -m venv env
-env\Scripts\activate.bat
+4. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+Mengakses kelima URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam README.md.
+Melakukan add-commit-push ke GitHub.
 
-Setelah itu, saya menambahkan dependencies yang diperlukan dengan memasukkan dependencies yang dibutuhkan ke dalam requirements.txt lalu saya pasang dependencies tersebut dengan perintah berikut:
+Checklist untuk tugas ini adalah sebagai berikut:
 
-pip install -r requirements.txt
+Sebelum saya membuat form registrasi, pertama-tama saya mengatur routing dari main/ ke / lalu membuat skeleton sebagai kerangka views untuk memastikan adanya konsistensi dalam desain kode saya sehingga mengurangi adanya redundansi kode.
 
-Lalu, saya buat proyek EnterKomputerKWSuper dengan perintah berikut.
+Setelah saya membuat skeleton sebagai kerangka views, saya mulai mengerjakan checklist masing-masing. Penjelasan mengenai pengerjaan langkah demi langkah dari setiap checklist adalah sebagai berikut:
+1. Membuat input form untuk menambahkan objek model pada app sebelumnya.
+    
+Untuk membuat sebuah input form, pertama-tama saya membuat berkas baru pada direktori main yang bernama forms.py untuk membuat struktur form yang dapat menerima data produk baru. Saya menambahkan kode berikut ke dalam forms.py:
 
-django-admin startproject EnterKomputerKWSuper .
+from django.forms import ModelForm
+from main.models import Product
 
-Lalu, saya menambahkan "*" pada ALLOWED_HOSTS sehingga semua host diizinkan untuk mengakses aplikasi web.
+class ProductForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = ["name", "amount", "price", "description"]
 
-Setelah saya menambahkan "*" pada ALLOWED_HOSTS saya menjalankan aplikasi yang bernama main yang nantinya saya aktifkan dengan menggunakan perintah
+model = Product menunjukkan bahwa ketika data dari form disimpan, isi dari form akan disimpan menjadi sebuah object Product dengan field dari model Product yaitu name, amount, price, dan description.
 
-python manage.py startapp main
+Lalu, saya membuat fungsi baru yang bernama create_product yang menerima parameter request untuk menghasilkan formulir yang dapat menambahkan data produk secara otomatis ketika data di-submit dari form. Kode dari create_product adalah sebagai berikut:
 
-Setelah membuat aplikasi yang bernama main, saya menambahkan aplikasi main ke dalam proyek dengan menambahkan "main" ke dalam list INSTALLED_APPS.
+def create_product(request):
+    form = ProductForm(request.POST or None)
 
-Setelah menambahkan main ke dalam INSTALLED_APPS, saya melakukan routing pada proyek agak dapat menjalankan aplikasi main dengan cara menambahkan urls.py yang bertugas untuk mengatur rute URL yang terkait dengan aplikasi main dengan kode berikut
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
 
-from django.urls import path
-from main.views import show_main
+    context = {'form': form}
+    return render(request, "create_product.html", context)
 
-app_name = 'main'
+Lalu, saya mengubah fungsi show_main pada berkasi views.py menjadi sebagai berikut:
 
-urlpatterns = [
+def show_main(request):
+    products = Product.objects.all() ->  untuk mengambil seluruh object Product yang tersimpan pada database.
+
+    context = {
+        'name': 'Fikri Budianto', # Nama kamu
+        'class': 'PBP F', # Kelas PBP kamu
+        'nama_toko': "EnterKomputerKWSuper",
+        'products': products
+    }
+
+    return render(request, "main.html", context)
+
+Setelah itu, pada berkas urls.py pada main saya mengimport fungsi create_product lalu menambahkan path url ke dalam urlpatterns pada urls.py pada main untuk mengakses fungsi create_product yang baru saja diimport.
+
+Lalu, saya membuat berkas HTML baru dengan nama create_product.html pada direktori main/templates yang saya isi dengan kode berikut:
+
+    {% extends 'base.html' %} 
+
+    {% block content %}
+    <h1>Add New Product</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Add Product"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    {% endblock %}   
+
+Setelah itu, saya menambahkan kode berikut pada main.html untuk menampilkan data produk dalam bentuk tabel serta tombol "Add New Product" yang akan redirect ke halaman form. 
+
+    ...
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Date Added</th>
+        </tr>
+
+        {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+
+        {% for product in products %}
+            <tr>
+                <td>{{product.name}}</td>
+                <td>{{product.amount}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.description}}</td>
+                <td>{{product.date_added}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <br />
+
+    <a href="{% url 'main:create_pr oduct' %}">
+        <button>
+            Add New Product
+        </button>
+    </a>
+
+    {% endblock content %}
+
+2. Tambahkan 5 fungsi views untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML by ID, dan JSON by ID.
+    Untuk membuat fungsi views yang melihat objek yang sudah ditambahkan dalam format HTML, pertama-tama saya menambahkan kode berikut:
+
+    def show_main(request):
+        products = Product.objects.all()
+
+        context = {
+            'name': 'Fikri Budianto', # Nama kamu
+            'class': 'PBP F', # Kelas PBP kamu
+            'nama_toko': "EnterKomputerKWSuper",
+            'products': products
+        }
+
+        return render(request, "main.html", context)
+
+    Fungsi ini bertujuan untuk melihat objek yang sudah ditambahkan dalam format HTML.
+
+    Lalu, saya menambahkan fungsi ini yang bertujuan untuk mengembalikan data dalam bentuk XML.
+
+    def show_xml(request):
+        data = Product.objects.all()
+        return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")   
+
+    Lalu, saya menambahkan fungsi ini untuk mengembalikan data dalam bentuk JSON.
+
+    def show_json(request):
+        data = Product.objects.all()
+        return HttpResponse(serializers.serialize("json", data), content_type="application/json")     
+    
+    Fungsi-fungsi diatas mengembalikan object HttpResponse yang berisi parameter data hasil query yang sudah diserialisasi menjadi JSON dan parameter content_type="application/json"
+
+    Setelah itu, saya menambahkan kedua fungsi ini yang masing-masing bertujuan untuk mengembalikan data berdasarkan ID dalam bentuk XML dan JSON. Fungsi-fungsi ini menerima parameter request dan id dan mengembalikan HttpResponse yang berisi parameter data hasil query yang sudah diserialisasi menjadi JSON atau XML dan parameter content_type dengan value "application/xml" (untuk format XML) atau "application/json" (untuk format JSON). Variabel data = Product.objects.filter(pk=id) menyimpan hasil query dari data dengan id tertentu yang ada pada Product.
+
+    def show_xml_by_id(request, id):
+        data = Product.objects.filter(pk=id)
+        return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+    def show_json_by_id(request, id):
+        data = Product.objects.filter(pk=id)
+        return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+3. Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 2.
+
+    Setelah saya menambahkan fungsi-fungsi di atas pada views.py, saya membuat rounting URL untuk masing-masing views yang telah ditambahkan untuk mengakses fungsi-fungsi yang telah dibuat. 
+
+    Hal tersebut saya lakukan dengan pertama-tama mengimpor semua fungsi yang diperlukan dari main.views dengan cara sebagai berikut:
+
+    from main.views import show_main, create_product, show_xml, show_json, show_xml_by_id, show_json_by_id 
+
+    Lalu, saya tambahkan path url berikut ke dalam urlpatterns pada urls.py untuk mengakses yang baru saja diimpor.
+
     path('', show_main, name='show_main'),
-]
+    path('xml/', show_xml, name='show_xml'), 
+    path('json/', show_json, name='show_json'), 
+    path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'),
+    path('json/<int:id>/', show_json_by_id, name='show_json_by_id'),
 
-2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 
-![Alt text](image.png)
-
-3. Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?
-
-Kita bisa membuat aplikasi web berbasis Django tanpa menggunakan virtual environment. Namun, pembuat aplikasi web sangat disarankan menggunakan virtual environment karena virtual environment bertugas untuk membantu mengisolasi dependencies antara proyek-proyek yang berbeda sehingga kita tidak perlu khawatir proyek kita akan berinterferensi dengan proyek lain. Selain itu virtual environment juga dapat mencegah masalah-masalah yang disebabkan oleh permasalahan environment seperti aplikasi yang dapat berjalan pada komputer kita tetapi tidak dapat berjalan di komputer orang lain. 
-
-4. Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya.
-
-MVC adalah sebuah framework dimana sebuah aplikasi dibagi menjadi tiga komponen besar dimana komponen-komponen tersebut mengurus bagian tertentu dari sebuah aplikasi sehingga komponen yang mengurus tampilan aplikasi dan komponen yang mengurus logika dari aplikasi terpisah. MVC terdiri dari tiga komponen, yaitu Model, View, dan Controller. Komponen model mengurusi logika dari aplikasi, komponen view mengurus antarmuka dari aplikasi, dan komponen controller bertugas sebagai perantara dari model dan view.
-
-MVVM terbagi menjadi tiga komponen, yaitu Model, View, dan Viewmodel. Berbeda dengan  merupakan objek yang mengenkapsulasi data dan perilaku dari domain aplikasi, sehingga model di dalam MVVM hanya bertugas untuk menyimpan data. View bertugas untuk mengurus tampilan antarmuka yang dilihat oleh user dan Viewmodel menghubungkan antara model dengan view atau menerima data dari modal dan mengirimkannya ke view untuk ditampilkan. Viewmodel menyimpan logika dari aplikasi.
-
-MVT terbagi menjadi tiga komponen, yaitu Model, View, dan Template. Model di dalam MVT bertugas untuk mengurus basis data dari aplikasi. Berbeda dengan MVC atau MVVC, Template bertugas untuk mengurus tampilan antarmuka seluruhnya dan View digunakan untuk mengeksekusi logika aplikasi dan berinteraksi dengan model untuk membawakan data. 
