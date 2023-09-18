@@ -186,12 +186,12 @@ Setelah itu, saya menambahkan kode berikut pada main.html untuk menampilkan data
 
 Screenshot hasil akses URL pada postman:
 
-EnterKomputerKWSuper/image-1.png
+image-1.png
 
-EnterKomputerKWSuper/image-2.png
+image-2.png
 
-EnterKomputerKWSuper/image-3.png
+image-3.png
 
-EnterKomputerKWSuper/image-4.png
+image-4.png
 
-EnterKomputerKWSuper/image-5.png
+image-5.png
