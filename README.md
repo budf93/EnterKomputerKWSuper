@@ -2,196 +2,295 @@ Nama            : Fikri Budianto
 Kelas           : PBP F
 Link Adaptable  : https://enterkomputerkwsuper.adaptable.app/main/
 
-1. Apa perbedaan antara form POST dan form GET dalam Django?
-- Pada form GET, suatu data diminta dari resource tertentu, sedangkan pada form POST data dikirim untuk diproses pada resource tertentu.
-- GET hanya boleh digunakan untuk memproses permintaan yang tidak memengaruhi kondisi dari sistem, sedangkan POST memang ditujukan untuk digunakan untuk memproses permintaan yanng dapat mengubah kondisi sistem.
-- GET menambahkan from-data ke dalam URL dalam bentuk pasangan name-value, sedangkan POST menambahkan from-data ke dalam body dari permintaan permintaan HTTP sehingga data tidak ditampilkan di dalam URL.
-- GET tidak dapat digunakan untuk mengirimkan data binary seperti gambar atau dokumen, sedangkan POST dapat digunakan untuk mengirimkan data ASCII dan juga data binary.
-
-2. Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?
-Perbedaan antara XML, JSON, dan HTML adalah XML dan JSON digunakan untuk penyimpanan dan pengiriman data, sedangkan HTML digunakan untuk mendeskripsikan bagaimana data tersebut ditampilkan di layar. Selain itu, walaupun XML dan JSON memiliki kemiripan dari segi penggunaan, terdapat beberapa perbedaan juga antara XML dan JSON.
-
-JSON memiliki fitur array yang dapat digunakan untuk menyimpan objek, tidak menggunakan end tag, dan lebih mudah untuk dibaca dan ditulis dibandingkan XML. Namun, dari segi keamanan XML memiliki tingkat keamanan yang lebih tinggi dibandingkan JSON. XML juga memiliki fitur komentar dan XML memiliki dukungan untuk berbagai macam jenis encoding, berlawanan dengan JSON yang hanya mendukung encoding UTF-8
-
-3. Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
-JSON sering digunakan dalam pertukaran data antara aplikasi web modern karena:
-- Ukuran file dari JSON yang sangat ringan
-- Sifat dari berkas JSON yang mudah dibaca dan dipahami oleh programmer lain
-- Hampir semua bahasa pemrograman yang populer memiliki kemampuan untuk membaca file JSON dan mengkonversikannya menjadi suatu objek atau class
-
-4. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
-Mengakses kelima URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam README.md.
-Melakukan add-commit-push ke GitHub.
-
 Checklist untuk tugas ini adalah sebagai berikut:
 
-Sebelum saya membuat form registrasi, pertama-tama saya mengatur routing dari main/ ke / lalu membuat skeleton sebagai kerangka views untuk memastikan adanya konsistensi dalam desain kode saya sehingga mengurangi adanya redundansi kode.
+- Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar.
 
-Setelah saya membuat skeleton sebagai kerangka views, saya mulai mengerjakan checklist masing-masing. Penjelasan mengenai pengerjaan langkah demi langkah dari setiap checklist adalah sebagai berikut:
-1. Membuat input form untuk menambahkan objek model pada app sebelumnya.
+- Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal.
+
+- Menghubungkan model Item dengan User.
+
+- Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.
+
+- Menjawab beberapa pertanyaan berikut pada README.md pada root folder (silakan modifikasi README.md yang telah kamu buat sebelumnya; tambahkan subjudul untuk setiap tugas).
+
+ 1. Apa itu Django UserCreationForm, dan jelaskan apa kelebihan dan kekurangannya?
+    UserCreationForm adalah sebuah framework autentikasi yang digunakan untuk menghandle pembuatan user baru. UserCreationForm menerima tiga buah input yaitu username, password1 dan password2 yang digunakan untuk konfirmasi password. UserCreationForm memiliki beberapa kelebihan diantaranya memudahkan registrasi user, menjamin keamanan data user, mudah menambahkan field data, dan validasi untuk mencegah pengiriman data yang berbahaya. Kekurangan dari UserCreationForm yaitu sulitnya dalam membuat suatu form yang lebih kompleks.
+ 
+ 2. Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
+    Di dalam konteks Django, autentikasi berfokus pada memverifikasi identitas seorang pengguna, sedangkan otorisasi berfokus pada tindakan yang seorang pengguna dapat lakukan ketika identitas mereka sudah terkonfirmasi.
+
+ 3. Apa itu cookies dalam konteks aplikasi web, dan bagaimana Django menggunakan cookies untuk mengelola data sesi pengguna?
+    Cookies merupakan text file berisikan data seperti username dan password yang digunakan untuk mengidentifikasi pengguna tertentu dan meningkatkan pengalaman mereka dalam menggunakan aplikasi web. Django menggunakan cookies untuk mengelola data sesi pengguna dengan cara memberikan suatu session ID unik kepada masing-masing session pengguna dan menyimpan session ID tersebut ke dalam cookie pada device pengguna. Session ID ini merujuk kepada data session pengguna. Ketika pengguna berinteraksi dengan aplikasi web, server menerima session ID dari cookie dan menggunakannya untuk mengakses session data dari session ID tersebut pada server.
+
+ 4. Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
+    Penggunaan cookies sendiri merupakan hal yang aman karena data yang disimpan sebagai cookies bukan merupakan data yang berbahaya. Namun, terdapat resiko cookies digunakan oleh orang-orang yang tidak bertanggungjawab untuk menyusup ke dalam akun seorang pengguna dan mencuri data-data yang dimiliki oleh seorang pengguna karena 
+    cookies berisikan data-data yang merupakan informasi pribadi dari pengguna.
+
+ 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+ Melakukan add-commit-push ke GitHub.
+
+ - Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar.
+
+Untuk fungsi registrasi dilakukan dengan cara pertama-tama mengimpor kode berikut ke dalam views.py pada direktori main 
+
+from django.shortcuts import redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages  
+
+Lalu, saya menambahkan fungsi yang bernama register yang menerima parameter request yang bertujuan untuk menghasilkan formulir registrasi secara otomatis dan menghasilkan akun pengguna ketika data disubmit dari form. Fungsi register adalah sebagai berikut:
+
+def register(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been successfully created!')
+            return redirect('main:login')
+    context = {'form':form}
+    return render(request, 'register.html', context)
+
+Lalu, saya membuat berkas HTML baru dengan nama register.html pada folder main/templates dengan isi sebagai berikut:
+
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Register</title>
+{% endblock meta %}
+
+{% block content %}  
+
+<div class = "login">
     
-Untuk membuat sebuah input form, pertama-tama saya membuat berkas baru pada direktori main yang bernama forms.py untuk membuat struktur form yang dapat menerima data produk baru. Saya menambahkan kode berikut ke dalam forms.py:
+    <h1>Register</h1>  
 
-from django.forms import ModelForm
-from main.models import Product
+        <form method="POST" >  
+            {% csrf_token %}  
+            <table>  
+                {{ form.as_table }}  
+                <tr>  
+                    <td></td>
+                    <td><input type="submit" name="submit" value="Daftar"/></td>  
+                </tr>  
+            </table>  
+        </form>
 
-class ProductForm(ModelForm):
-    class Meta:
-        model = Product
-        fields = ["name", "amount", "price", "description"]
+    {% if messages %}  
+        <ul>   
+            {% for message in messages %}  
+                <li>{{ message }}</li>  
+                {% endfor %}  
+        </ul>   
+    {% endif %}
 
-model = Product menunjukkan bahwa ketika data dari form disimpan, isi dari form akan disimpan menjadi sebuah object Product dengan field dari model Product yaitu name, amount, price, dan description.
+</div>  
 
-Lalu, saya membuat fungsi baru yang bernama create_product yang menerima parameter request untuk menghasilkan formulir yang dapat menambahkan data produk secara otomatis ketika data di-submit dari form. Kode dari create_product adalah sebagai berikut:
+{% endblock content %}
+
+Lalu, saya mengimpor fungsi yang telah saya buat dengan cara sebagai berikut:
+
+from main.views import register 
+
+Lalu, saya menambahkan path url ke dalam urlpatterns untuk mengakses fungsi yang sudah diimpor tadi:
+...
+path('register/', register, name='register'), #sesuaikan dengan nama fungsi yang dibuat
+...
+
+Untuk fungsi login, pertama-tama saya mengimport authenticate dan login pada bagian paling atas dengan kode sebagai berikut:
+
+from django.contrib.auth import authenticate, login
+
+Lalu, saya menambahkan fungsi login_user yang bertujuan untuk mengautentikasi pengguna yang ingin login:
+
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('main:show_main')
+        else:
+            messages.info(request, 'Sorry, incorrect username or password. Please try again.')
+    context = {}
+    return render(request, 'login.html', context)
+
+Lalu, saya membuat berkas HTML baru bernama login.html pada folder main/templates yang berisikan kode sebagai berikut:
+
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Login</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class = "login">
+
+    <h1>Login</h1>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Username: </td>
+                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+            </tr>
+                    
+            <tr>
+                <td>Password: </td>
+                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input class="btn login_btn" type="submit" value="Login"></td>
+            </tr>
+        </table>
+    </form>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}     
+        
+    Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a>
+
+</div>
+
+{% endblock content %}
+
+Lalu, pada berkas urls.py saya mengimport fungsi yang baru saya buat lalu saya menambahkan path url yang sesuai ke dalam urlpatterns untuk mengakses fungsi yang sudah diimpor tadi dengan kode sebagai berikut:
+
+Kode untuk mengimpor fungsi yang sudah dibuat:
+
+from main.views import login_user 
+
+Kode untuk menambahkan path url ke urlpatterns:
+...
+path('login/', login_user, name='login'),
+...
+
+Untuk fungsi logout, pertama-tama saya mengimport logout dengan kode sebagai berikut:
+
+from django.contrib.auth.decorators import login_required
+
+Lalu, saya membuat fungsi logout_user yang bertujuan untuk melakukan mekanisme logout. Kodenya adalah sebagai berikut:
+
+def logout_user(request):
+    logout(request)
+    return redirect('main:login')
+
+Lalu, saya menambahkan kode berikut setelah hyperlink tag untuk Add New Product pada berkas main.html.
+
+<a href="{% url 'main:logout' %}">
+    <button>
+        Logout
+    </button>
+</a>  
+
+Lalu, pada file urls.py saha mengimport fungsi yang baru saja saya buat pada views.py dengan kode sebagai berikut:
+
+from main.views import logout_user
+
+Lalu, saya menambahkan path url ke dalam urlpatterns untuk mengakses fungsi logout_user yang baru saja saya buat dengan cara sebagai berikut:
+
+path('logout/', logout_user, name='logout'),
+
+- Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal.
+
+Untuk membuat pengguna, pertama-tama hal yang dilakukan adalah membuat akun dengan memencet tombol Register Now pada login page sebagai berikut: 
+
+![Alt text](image-9.png)
+
+Selanjutnya, masukkan username dan password pada kotak yang telah disediakan lalu tekan daftar ketika sudah selesai
+
+![Alt text](image-10.png)
+
+Lalu, untuk menambahkan dummy data hal yang dilakukan adalah menekan tombol add new product pada laman berikut:
+
+![Alt text](image-7.png)
+
+Setelah itu, masukkan nama, jumlah produk, harga produk, dan deskripsi produk pada kotak yang telah disediakan. Lakukan sampai tiga kali untuk 3 produk yang ingin dibuat.
+
+![Alt text](image-6.png)
+
+Setelah menambahkan 3 produk pada satu akun, buat akun baru dengan langkah-langkah diatas dan lakukan hal yang sama pada akun tersebut.
+
+- Menghubungkan model Item dengan User.
+
+Untuk menghubungkan mode Item dengan User, pertama-tama saya mengimpor model pada berkas models.py dengan cara menambahkan kode berikut di bagian paling atas:
+
+from django.contrib.auth.models import User
+
+Lalu, pada model Product yang telah dibuat, saya menambahkan kode berikut untuk menghubungkan satu produk dengan satu user melalui sebuah relationship.
+
+class Product(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    ...
+
+Lalu, pada berkas views.py saya mengubah fungsi create_product menjadi sebagai berikut:
 
 def create_product(request):
     form = ProductForm(request.POST or None)
 
     if form.is_valid() and request.method == "POST":
-        form.save()
+        product = form.save(commit=False)
+        product.user = request.user
+        product.save()
         return HttpResponseRedirect(reverse('main:show_main'))
+        ...
 
-    context = {'form': form}
-    return render(request, "create_product.html", context)
-
-Lalu, saya mengubah fungsi show_main pada berkasi views.py menjadi sebagai berikut:
+Lalu, saya mengubah fungsi show_main menjadi sebagai berikut:
 
 def show_main(request):
-    products = Product.objects.all() ->  untuk mengambil seluruh object Product yang tersimpan pada database.
+    products = Product.objects.filter(user=request.user)
 
     context = {
-        'name': 'Fikri Budianto', # Nama kamu
-        'class': 'PBP F', # Kelas PBP kamu
-        'nama_toko': "EnterKomputerKWSuper",
-        'products': products
-    }
-
-    return render(request, "main.html", context)
-
-Setelah itu, pada berkas urls.py pada main saya mengimport fungsi create_product lalu menambahkan path url ke dalam urlpatterns pada urls.py pada main untuk mengakses fungsi create_product yang baru saja diimport.
-
-Lalu, saya membuat berkas HTML baru dengan nama create_product.html pada direktori main/templates yang saya isi dengan kode berikut:
-
-    {% extends 'base.html' %} 
-
-    {% block content %}
-    <h1>Add New Product</h1>
-
-    <form method="POST">
-        {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-            <tr>
-                <td></td>
-                <td>
-                    <input type="submit" value="Add Product"/>
-                </td>
-            </tr>
-        </table>
-    </form>
-
-    {% endblock %}   
-
-Setelah itu, saya menambahkan kode berikut pada main.html untuk menampilkan data produk dalam bentuk tabel serta tombol "Add New Product" yang akan redirect ke halaman form. 
-
+        'name': request.user.username,
     ...
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Amount</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Date Added</th>
-        </tr>
+...
 
-        {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+Setelah semua langkah tersebut dilakukan, dijalankan migrasi dengan cara menjalankan perintah berikut pada command prompt:
 
-        {% for product in products %}
-            <tr>
-                <td>{{product.name}}</td>
-                <td>{{product.amount}}</td>
-                <td>{{product.price}}</td>
-                <td>{{product.description}}</td>
-                <td>{{product.date_added}}</td>
-            </tr>
-        {% endfor %}
-    </table>
+python manage.py makemigrations
+python manage.py migrate
 
-    <br />
+- Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.
 
-    <a href="{% url 'main:create_pr oduct' %}">
-        <button>
-            Add New Product
-        </button>
-    </a>
+Pertama-tama, saya membuka views.py lalu mengimpor HttpResponseRedirect, reverse, dan datetime dengan cara sebagai berikut:
 
-    {% endblock content %}
+import datetime
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
-2. Tambahkan 5 fungsi views untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML by ID, dan JSON by ID.
-    Untuk membuat fungsi views yang melihat objek yang sudah ditambahkan dalam format HTML, pertama-tama saya menambahkan kode berikut:
+Lalu, pada fungsi login_user saya akan menambahkan fungsi untuk menambahkan cookie yang bernama last_login untuk melihat kapan terakhir kali pengguna melakukan login dengan menggantikan kode yang terdapat pada blok if user is not None menjadi kode berikut:
 
-    def show_main(request):
-        products = Product.objects.all()
+...
+if user is not None:
+    login(request, user)
+    response = HttpResponseRedirect(reverse("main:show_main")) 
+    response.set_cookie('last_login', str(datetime.datetime.now()))
+    return response
+...
 
-        context = {
-            'name': 'Fikri Budianto', # Nama kamu
-            'class': 'PBP F', # Kelas PBP kamu
-            'nama_toko': "EnterKomputerKWSuper",
-            'products': products
-        }
+Lalu, pada fungsi show_main saya menambahkan potongan kode 'last_login': request.COOKIES['last_login'], ke dalam variabel context dan mengubah fungsi logout_user menjadi potongan kode berikut:
 
-        return render(request, "main.html", context)
+def logout_user(request):
+    logout(request)
+    response = HttpResponseRedirect(reverse('main:login'))
+    response.delete_cookie('last_login')
+    return response
 
-    Fungsi ini bertujuan untuk melihat objek yang sudah ditambahkan dalam format HTML.
+Lalu, pada berkas main.html saya menambahkan potongan kode berikut di antara tabel dan tombol logout untuk menampilkan data last_login
 
-    Lalu, saya menambahkan fungsi ini yang bertujuan untuk mengembalikan data dalam bentuk XML.
+...
+<h5>Sesi terakhir login: {{ last_login }}</h5>
+...
 
-    def show_xml(request):
-        data = Product.objects.all()
-        return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")   
-
-    Lalu, saya menambahkan fungsi ini untuk mengembalikan data dalam bentuk JSON.
-
-    def show_json(request):
-        data = Product.objects.all()
-        return HttpResponse(serializers.serialize("json", data), content_type="application/json")     
-    
-    Fungsi-fungsi diatas mengembalikan object HttpResponse yang berisi parameter data hasil query yang sudah diserialisasi menjadi JSON dan parameter content_type="application/json"
-
-    Setelah itu, saya menambahkan kedua fungsi ini yang masing-masing bertujuan untuk mengembalikan data berdasarkan ID dalam bentuk XML dan JSON. Fungsi-fungsi ini menerima parameter request dan id dan mengembalikan HttpResponse yang berisi parameter data hasil query yang sudah diserialisasi menjadi JSON atau XML dan parameter content_type dengan value "application/xml" (untuk format XML) atau "application/json" (untuk format JSON). Variabel data = Product.objects.filter(pk=id) menyimpan hasil query dari data dengan id tertentu yang ada pada Product.
-
-    def show_xml_by_id(request, id):
-        data = Product.objects.filter(pk=id)
-        return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
-
-    def show_json_by_id(request, id):
-        data = Product.objects.filter(pk=id)
-        return HttpResponse(serializers.serialize("json", data), content_type="application/json")
-
-3. Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 2.
-
-    Setelah saya menambahkan fungsi-fungsi di atas pada views.py, saya membuat rounting URL untuk masing-masing views yang telah ditambahkan untuk mengakses fungsi-fungsi yang telah dibuat. 
-
-    Hal tersebut saya lakukan dengan pertama-tama mengimpor semua fungsi yang diperlukan dari main.views dengan cara sebagai berikut:
-
-    from main.views import show_main, create_product, show_xml, show_json, show_xml_by_id, show_json_by_id 
-
-    Lalu, saya tambahkan path url berikut ke dalam urlpatterns pada urls.py untuk mengakses yang baru saja diimpor.
-
-    path('', show_main, name='show_main'),
-    path('xml/', show_xml, name='show_xml'), 
-    path('json/', show_json, name='show_json'), 
-    path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'),
-    path('json/<int:id>/', show_json_by_id, name='show_json_by_id'),
-
-Screenshot hasil akses URL pada postman:
-
-image-1.png
-
-image-2.png
-
-image-3.png
-
-image-4.png
-
-image-5.png
+Ketika kita ingin melihat data cookie last_login, kita dapat menggunakan fitur inspect element pada browser chrome dan membuka bagian Application/Storage. Lalu, klik bagian Cookies dan lihat data cookies yang tersedia. Apabila kita logout dari aplikasi, cookie yang sebelumnya dibuat akan hilang dan dibuat ulang ketika melakukan login ulang.
