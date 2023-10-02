@@ -116,7 +116,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'static/png-clipart-faculty-of-social-and-political-sciences-universitas-indonesia-faculty-of-computer-science-university-of-indonesia-makara-fakultas-ekonomi-dan-bisnis-universitas-indonesia-bachelor-s-thumbnail.png/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

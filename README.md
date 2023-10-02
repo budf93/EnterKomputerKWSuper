@@ -4,293 +4,182 @@ Link Adaptable  : https://enterkomputerkwsuper.adaptable.app/main/
 
 Checklist untuk tugas ini adalah sebagai berikut:
 
-- Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar.
+ Kustomisasi desain pada templat HTML yang telah dibuat pada Tugas 4 dengan menggunakan CSS atau CSS framework (seperti Bootstrap, Tailwind, Bulma) dengan ketentuan sebagai berikut
 
-- Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal.
+ Kustomisasi halaman login, register, dan tambah inventori semenarik mungkin.
+ Kustomisasi halaman daftar inventori menjadi lebih berwarna maupun menggunakan apporach lain seperti menggunakan Card.
 
-- Menghubungkan model Item dengan User.
+Menjawab beberapa pertanyaan berikut pada README.md pada root folder (silakan modifikasi README.md yang telah kamu buat sebelumnya; tambahkan subjudul untuk setiap tugas).
 
-- Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.
-
-- Menjawab beberapa pertanyaan berikut pada README.md pada root folder (silakan modifikasi README.md yang telah kamu buat sebelumnya; tambahkan subjudul untuk setiap tugas).
-
- 1. Apa itu Django UserCreationForm, dan jelaskan apa kelebihan dan kekurangannya?
-    UserCreationForm adalah sebuah framework autentikasi yang digunakan untuk menghandle pembuatan user baru. UserCreationForm menerima tiga buah input yaitu username, password1 dan password2 yang digunakan untuk konfirmasi password. UserCreationForm memiliki beberapa kelebihan diantaranya memudahkan registrasi user, menjamin keamanan data user, mudah menambahkan field data, dan validasi untuk mencegah pengiriman data yang berbahaya. Kekurangan dari UserCreationForm yaitu sulitnya dalam membuat suatu form yang lebih kompleks.
- 
- 2. Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
-    Di dalam konteks Django, autentikasi berfokus pada memverifikasi identitas seorang pengguna, sedangkan otorisasi berfokus pada tindakan yang seorang pengguna dapat lakukan ketika identitas mereka sudah terkonfirmasi.
-
- 3. Apa itu cookies dalam konteks aplikasi web, dan bagaimana Django menggunakan cookies untuk mengelola data sesi pengguna?
-    Cookies merupakan text file berisikan data seperti username dan password yang digunakan untuk mengidentifikasi pengguna tertentu dan meningkatkan pengalaman mereka dalam menggunakan aplikasi web. Django menggunakan cookies untuk mengelola data sesi pengguna dengan cara memberikan suatu session ID unik kepada masing-masing session pengguna dan menyimpan session ID tersebut ke dalam cookie pada device pengguna. Session ID ini merujuk kepada data session pengguna. Ketika pengguna berinteraksi dengan aplikasi web, server menerima session ID dari cookie dan menggunakannya untuk mengakses session data dari session ID tersebut pada server.
-
- 4. Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
-    Penggunaan cookies sendiri merupakan hal yang aman karena data yang disimpan sebagai cookies bukan merupakan data yang berbahaya. Namun, terdapat resiko cookies digunakan oleh orang-orang yang tidak bertanggungjawab untuk menyusup ke dalam akun seorang pengguna dan mencuri data-data yang dimiliki oleh seorang pengguna karena 
-    cookies berisikan data-data yang merupakan informasi pribadi dari pengguna.
-
+ 1. Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.
+    Manfaat dari penggunaan element selector di dalam CSS adalah kita bisa membuat tampilan elemen HTML yang konsisten, mudah untuk diimplementasikan, efisien untuk digunakan, mudah untuk dimaintain, mempercepat pengembangan, dan lebih mudah untuk dimanage. Kita dapat menggunakan element selector ketika kita ingin mengubah style dari elemen-elemen HTML yang bersifat default, ketika kita ingin membuat design yang konsisten, untuk mereset styling yang sudah ada, ketika kita ingin memmbuat fondasi dasar untuk styling dari elemen, dan untuk mengubah styling elemen HTML secara cepat.
+ 2. Jelaskan HTML5 Tag yang kamu ketahui.
+   - <head> : berisi metadata mengenai website 
+   - <!--...--> : digunakan untuk comment pada kode HTML
+   - <li> : menandakan suatu item dari suatu daftar
+   - <ol> : menandakan suatu ordered list/daftar terurut
+   - <ul> : menandakan suatu unordered list/daftar tidak terurut
+   - <p> : menandakan suatu paragraf di dalam tampilan website
+   - <img> : menandakan suatu objek gambar
+   - <h1> to <h6> : menandakan suatu header di dalam tampilan website
+   - <button> : menandakan suatu tombol di dalam suatu website, bisa merujuk ke suatu website
+   - <strong> : untuk menebalkan suatu bagian dari suatu teks
+   3. Jelaskan perbedaan antara margin dan padding.
+    Margin merupakan ruang yang terdapat di luar suatu elemen. Margin tidak memiliki warna background dan tidak memengaruhi warna background dari suatu elemen. Selain itu, margin juga menciptakan jarak antara suatu elemen dengan elemen lain.
+    Padding merupakan jarak yang terdapat diantara konten dan border dari suatu elemen. Padding memiliki warna background dan memengaruhi warna background dari suatu elemen. Selain itu, padding tidak memengaruhi spacing antar elemen.
+ 4. Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+    Bootstrap merupakan framework yang sudah lama dikembangkan dan banyak dipakai karena sifatnya yang responsif dan efisien. Bootstrap menyediakan komponen-komponen untuk membuat UI yang sudah dibuat sebelumnya sehingga memudahkan pekerjaan programmer. Selain itu, Bootstrap juga memiliki ukuran berkas yang besar. Akan tetapi, Bootstrap sulit untuk dikostumisasi karena Bootstrap memiliki banyak sekali komponen pembangun yang sudah baku.
+    Di sisi lain, CSS Tailwind merupakan framework yang tergolong baru dan masih terus dikembangkan menjadi lebih baik lagi. CSS Tailwind merupakan utility-first framework yang memberikan fleksibilitas kepada programmer untuk mengkostumisasikan tampilan website. Hal ini berbanding terbalik dengan Bootstrap yang cenderung lebih sulit untuk dikostumisasi. CSS Tailwind juga memiliki ukuran berkaas yang lebih kecil bila dibandingkan dengan Bootstrap.
+    CSS Tailwind lebih baik digunakan apabila kita memerlukan kostumisasi yang lebih leluasa pada website yang kita punya sedangkan Bootstrap lebih baik apabila kita ingin membuat aplikasi web dan mobile yang lebih responsif.
  5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
- Melakukan add-commit-push ke GitHub.
-
- - Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar.
-
-Untuk fungsi registrasi dilakukan dengan cara pertama-tama mengimpor kode berikut ke dalam views.py pada direktori main 
-
-from django.shortcuts import redirect
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib import messages  
-
-Lalu, saya menambahkan fungsi yang bernama register yang menerima parameter request yang bertujuan untuk menghasilkan formulir registrasi secara otomatis dan menghasilkan akun pengguna ketika data disubmit dari form. Fungsi register adalah sebagai berikut:
-
-def register(request):
-    form = UserCreationForm()
-
-    if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Your account has been successfully created!')
-            return redirect('main:login')
-    context = {'form':form}
-    return render(request, 'register.html', context)
-
-Lalu, saya membuat berkas HTML baru dengan nama register.html pada folder main/templates dengan isi sebagai berikut:
-
-{% extends 'base.html' %}
-
-{% block meta %}
-    <title>Register</title>
-{% endblock meta %}
-
-{% block content %}  
-
-<div class = "login">
-    
-    <h1>Register</h1>  
-
-        <form method="POST" >  
-            {% csrf_token %}  
-            <table>  
-                {{ form.as_table }}  
-                <tr>  
-                    <td></td>
-                    <td><input type="submit" name="submit" value="Daftar"/></td>  
-                </tr>  
-            </table>  
-        </form>
-
-    {% if messages %}  
-        <ul>   
-            {% for message in messages %}  
-                <li>{{ message }}</li>  
-                {% endfor %}  
-        </ul>   
-    {% endif %}
-
-</div>  
-
-{% endblock content %}
-
-Lalu, saya mengimpor fungsi yang telah saya buat dengan cara sebagai berikut:
-
-from main.views import register 
-
-Lalu, saya menambahkan path url ke dalam urlpatterns untuk mengakses fungsi yang sudah diimpor tadi:
-...
-path('register/', register, name='register'), #sesuaikan dengan nama fungsi yang dibuat
-...
-
-Untuk fungsi login, pertama-tama saya mengimport authenticate dan login pada bagian paling atas dengan kode sebagai berikut:
-
-from django.contrib.auth import authenticate, login
-
-Lalu, saya menambahkan fungsi login_user yang bertujuan untuk mengautentikasi pengguna yang ingin login:
-
-def login_user(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('main:show_main')
-        else:
-            messages.info(request, 'Sorry, incorrect username or password. Please try again.')
-    context = {}
-    return render(request, 'login.html', context)
-
-Lalu, saya membuat berkas HTML baru bernama login.html pada folder main/templates yang berisikan kode sebagai berikut:
-
-{% extends 'base.html' %}
-
-{% block meta %}
-    <title>Login</title>
-{% endblock meta %}
-
-{% block content %}
-
-<div class = "login">
-
-    <h1>Login</h1>
-
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
-    </form>
-
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
-        
-    Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a>
-
-</div>
-
-{% endblock content %}
-
-Lalu, pada berkas urls.py saya mengimport fungsi yang baru saya buat lalu saya menambahkan path url yang sesuai ke dalam urlpatterns untuk mengakses fungsi yang sudah diimpor tadi dengan kode sebagai berikut:
-
-Kode untuk mengimpor fungsi yang sudah dibuat:
-
-from main.views import login_user 
-
-Kode untuk menambahkan path url ke urlpatterns:
-...
-path('login/', login_user, name='login'),
-...
-
-Untuk fungsi logout, pertama-tama saya mengimport logout dengan kode sebagai berikut:
-
-from django.contrib.auth.decorators import login_required
-
-Lalu, saya membuat fungsi logout_user yang bertujuan untuk melakukan mekanisme logout. Kodenya adalah sebagai berikut:
-
-def logout_user(request):
-    logout(request)
-    return redirect('main:login')
-
-Lalu, saya menambahkan kode berikut setelah hyperlink tag untuk Add New Product pada berkas main.html.
-
-<a href="{% url 'main:logout' %}">
-    <button>
-        Logout
-    </button>
-</a>  
-
-Lalu, pada file urls.py saha mengimport fungsi yang baru saja saya buat pada views.py dengan kode sebagai berikut:
-
-from main.views import logout_user
-
-Lalu, saya menambahkan path url ke dalam urlpatterns untuk mengakses fungsi logout_user yang baru saja saya buat dengan cara sebagai berikut:
-
-path('logout/', logout_user, name='logout'),
-
-- Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal.
-
-Untuk membuat pengguna, pertama-tama hal yang dilakukan adalah membuat akun dengan memencet tombol Register Now pada login page sebagai berikut: 
-
-![Alt text](image-9.png)
-
-Selanjutnya, masukkan username dan password pada kotak yang telah disediakan lalu tekan daftar ketika sudah selesai
-
-![Alt text](image-10.png)
-
-Lalu, untuk menambahkan dummy data hal yang dilakukan adalah menekan tombol add new product pada laman berikut:
-
-![Alt text](image-7.png)
-
-Setelah itu, masukkan nama, jumlah produk, harga produk, dan deskripsi produk pada kotak yang telah disediakan. Lakukan sampai tiga kali untuk 3 produk yang ingin dibuat.
-
-![Alt text](image-6.png)
-
-Setelah menambahkan 3 produk pada satu akun, buat akun baru dengan langkah-langkah diatas dan lakukan hal yang sama pada akun tersebut.
-
-- Menghubungkan model Item dengan User.
-
-Untuk menghubungkan mode Item dengan User, pertama-tama saya mengimpor model pada berkas models.py dengan cara menambahkan kode berikut di bagian paling atas:
-
-from django.contrib.auth.models import User
-
-Lalu, pada model Product yang telah dibuat, saya menambahkan kode berikut untuk menghubungkan satu produk dengan satu user melalui sebuah relationship.
-
-class Product(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    ...
-
-Lalu, pada berkas views.py saya mengubah fungsi create_product menjadi sebagai berikut:
-
-def create_product(request):
-    form = ProductForm(request.POST or None)
+   Pertama-tama saya menambahkan dulu Bootstrap ke dalam aplikasi dengan cara menambahkan kode-kode berikut ke templates/base.html.
+   <head>
+      {% block meta %}
+         <meta charset="UTF-8" />
+         <meta name="viewport" content="width=device-width, initial-scale=1">
+      {% endblock meta %}
+   </head>   
+   Kode berikut bertujuan agar halaman web yang saya punya dapat menyesuaikan ukuran dari perilaku perangkat mobile.
+   Lalu, saya menambahkan Bootstrap CSS dan juga JS. Hal itu dicapai dengan menambahkan kode berikut ke dalam base.html:
+   <head>
+   ...
+      {% block meta %}
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+      {% endblock meta %}
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+J4jsl5c9zdLKaUk5Ae5f5b1bw6AUn5f5v8FZJoMxm6f5cH1" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+   </head>
+   Lalu, saya membuat navbar dengan cara menambahkan kode berikut sebelum bagian body:
+   <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="https://sidang.cs.ui.ac.id/static/media/fasilkom.5f08cf824cb2e94af912.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                Fikri Budianto
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'main:logout' %}">Tombol Logout</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                Toko Komputer Terpercaya Anda   
+                </span>
+            </div>
+        </div>
+    </nav>
+    Kode diatas bertujuan untuk menampilkan navbar yang berisi nama saya, tombol logout, dan slogan yang bebas untuk diisi apapun. Navbar ini nantinya juga akan menampilkan logo Fasilkom UI di bagian pojok kiri.
+
+    Lalu, saya membuat fitur edit dengan cara pertama-tama membuat fungsi baru yang bernama edit_product yang menerima parameter    request dan id. Fungsi yang dibuat adalah sebagai berikut:
+
+    def edit_product(request, id):
+    # Get product berdasarkan ID
+      product = Product.objects.get(pk = id)
+
+    # Set product sebagai instance dari form
+      form = ProductForm(request.POST or None, instance=product)
 
     if form.is_valid() and request.method == "POST":
-        product = form.save(commit=False)
-        product.user = request.user
-        product.save()
-        return HttpResponseRedirect(reverse('main:show_main'))
-        ...
+      # Simpan form dan kembali ke halaman awal
+      form.save()
+      return HttpResponseRedirect(reverse('main:show_main'))
 
-Lalu, saya mengubah fungsi show_main menjadi sebagai berikut:
+    context = {'form': form}
+    return render(request, "edit_product.html", context)
 
-def show_main(request):
-    products = Product.objects.filter(user=request.user)
+    Lalu, saya membuat berkas HTML baru yang bernama edit_product.html pada subdirektori main/templates. Berkas tersebut saya isi dengan kode berikut:
 
-    context = {
-        'name': request.user.username,
-    ...
-...
+      {% extends 'base.html' %}
 
-Setelah semua langkah tersebut dilakukan, dijalankan migrasi dengan cara menjalankan perintah berikut pada command prompt:
+      {% load static %}
 
-python manage.py makemigrations
-python manage.py migrate
+      {% block content %}
 
-- Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.
+      <h1>Edit Product</h1>
 
-Pertama-tama, saya membuka views.py lalu mengimpor HttpResponseRedirect, reverse, dan datetime dengan cara sebagai berikut:
+      <form method="POST">
+         {% csrf_token %}
+         <table>
+            {{ form.as_table }}
+            <tr>
+                  <td></td>
+                  <td>
+                     <input type="submit" value="Edit Product"/>
+                  </td>
+            </tr>
+         </table>
+      </form>
 
-import datetime
-from django.http import HttpResponseRedirect
-from django.urls import reverse
+      {% endblock %}
 
-Lalu, pada fungsi login_user saya akan menambahkan fungsi untuk menambahkan cookie yang bernama last_login untuk melihat kapan terakhir kali pengguna melakukan login dengan menggantikan kode yang terdapat pada blok if user is not None menjadi kode berikut:
+      Lalu, pada berkas urls.py saya mengimport fungsi edit_product dan menambahkan path url ke dalam urlpatterns dengan cara menambahkan kode berikut : 
 
-...
-if user is not None:
-    login(request, user)
-    response = HttpResponseRedirect(reverse("main:show_main")) 
-    response.set_cookie('last_login', str(datetime.datetime.now()))
-    return response
-...
+      from main.views import edit_product.
+      
+      Lalu, saya menambahkan kode berikut untuk menambahkan path url ke dalam urlpatterns:
 
-Lalu, pada fungsi show_main saya menambahkan potongan kode 'last_login': request.COOKIES['last_login'], ke dalam variabel context dan mengubah fungsi logout_user menjadi potongan kode berikut:
+      ...
+      path('edit-product/<int:id>', edit_product, name='edit_product'),
+      ...
 
-def logout_user(request):
-    logout(request)
-    response = HttpResponseRedirect(reverse('main:login'))
-    response.delete_cookie('last_login')
-    return response
+      Lalu, saya menmabahkan kode berikut ke dalam main.html yang berada di main/templates agar terlihat tombol edit pada setiap baris tabel:
+      ...
+      <tr>
+         ...
+         <td>
+            <a href="{% url 'main:edit_product' product.pk %}">
+                  <button>
+                     Edit
+                  </button>
+            </a>
+         </td>
+      </tr>
+      ...
 
-Lalu, pada berkas main.html saya menambahkan potongan kode berikut di antara tabel dan tombol logout untuk menampilkan data last_login
+      Setelah saya saya menambahkan fitur edit, saya membuat fungsi untuk menghapus produk. Pertama-tama, saya membuat fungsi delete_product dengan kode sebagai berikut :
 
-...
-<h5>Sesi terakhir login: {{ last_login }}</h5>
-...
+      def delete_product(request, id):
+         # Get data berdasarkan ID
+         product = Product.objects.get(pk = id)
+         # Hapus data
+         product.delete()
+         # Kembali ke halaman awal
+         return HttpResponseRedirect(reverse('main:show_main'))
 
-Ketika kita ingin melihat data cookie last_login, kita dapat menggunakan fitur inspect element pada browser chrome dan membuka bagian Application/Storage. Lalu, klik bagian Cookies dan lihat data cookies yang tersedia. Apabila kita logout dari aplikasi, cookie yang sebelumnya dibuat akan hilang dan dibuat ulang ketika melakukan login ulang.
+      Lalu, di dalam file urls.py saya mengimport fungsi tersebut dan menambahkan path url ke dalam urlpatterns untuk mengakses fungsi yang sudah diimpor dengan cara menambahkan kode berikut :
+
+      from main.views import delete_product
+
+      Lalu kode berikut:
+
+      ...
+      path('delete/<int:id>', delete_product, name='delete_product'), # sesuaikan dengan nama fungsi yang dibuat
+      ...  
+
+      Setelah itu, saya menambahkan kode berikut pada main.html pada folder main/templates agar terdapat tombol hapus untuk setiap produk.
+
+      ...
+      <tr>
+         ...
+         <td>
+            <a href="{% url 'main:edit_product' product.pk %}">
+                  <button>
+                     Edit
+                  </button>
+            </a>
+            <a href="{% url 'main:delete_product' product.pk %}">
+                  <button>
+                        Delete
+                  </button>
+               </a>
+         </td>
+      </tr>
+      ...
+
+   
